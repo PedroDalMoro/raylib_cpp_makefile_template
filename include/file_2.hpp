@@ -3,6 +3,6 @@
 
 #include "raylib.h"
 
-void func_file_2(void);
+int func_file_2(void);
 
 #endif  // FILE_2_HPP
