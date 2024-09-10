@@ -3,7 +3,7 @@ This is a very simple and easy to understand template for using raylib on Window
 
 I know that there are thousands of other raylib templates out there, but this only shows how *not so easy* can be to get everything up and running. I hope that this example can help someone to start their development, and especially, to understand what they are doing. 
 
-> NOTE: If you want the really simple makefile version, take a look at commit `53e301418d638f5d68693b02adfb06dc0c3af7bd` on this project. Things have evolved since that. 
+> NOTE: If you want the really simple makefile version, take a look at commit `744a4de837dae6a609631d478a5e1554e823db22` on this project. Things have evolved since that. 
 
 ### Components
 * Raylib v5.0.
