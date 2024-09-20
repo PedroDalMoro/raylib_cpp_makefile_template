@@ -1,0 +1,25 @@
+name: Build and Test
+
+on:
+  pull_request:
+    branches:
+      - github_actions
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Make
+        run: |
+          choco install make
+          make --version
+
+      - name: Build Game
+        run: make game
+
+      - name: Run Unit Tests
+        run: make tests
