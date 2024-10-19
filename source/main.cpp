@@ -19,6 +19,8 @@ int main(void)
             func_file_1();
             func_file_2();
 
+            asdf
+
         EndDrawing();
     }
 
