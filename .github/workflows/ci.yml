@@ -1,0 +1,21 @@
+name: Docker pipeline
+
+on:
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # Utilizando o Docker para rodar o build
+      - name: Build usando Docker
+        run: docker run --rm -v ${{ github.workspace }}:/app -w /app ptitluca/raylib:latest /bin/bash -c "make"
+
+      # # Exemplo de como rodar os testes, se for o caso
+      # - name: Rodar testes no container Docker
+      #   run: |
+      #     docker run --rm -v ${{ github.workspace }}:/app -w /app ptitluca/raylib:latest /bin/bash -c "./tests/tests_linux"
