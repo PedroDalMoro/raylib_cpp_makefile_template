@@ -19,8 +19,16 @@ CXX = g++
 DEBUG_FLAGS = -O0 -g
 CXXFLAGS = -Wall -Wextra
 
-# raylib things
-LIBS = -lraylib -lgdi32 -lwinmm
+# # raylib things
+# LIBS = -lraylib -lgdi32 -lwinmm
+
+ifeq ($(OS),Windows_NT)
+    LIBS = -lraylib -lgdi32 -lwinmm
+	TESTS_TARGET = tests.exe
+else
+    LIBS = -lraylib -lGL -lm -lpthread -ldl -lrt -lX11
+	TESTS_TARGET = tests_linux
+endif
 
 # creating the executable from the object files. the dependencies here are the object files, 
 # and the existence of a build/ folder. 
@@ -49,7 +57,7 @@ clean:
 # 
 
 # setup
-TESTS_TARGET = tests.exe
+# TESTS_TARGET = tests.exe
 TESTS_FOLDER = tests
 TESTS_BUILD_FOLDER = $(TESTS_FOLDER)/build
 CATCH2_FOLDER = $(TESTS_FOLDER)/catch2
@@ -69,7 +77,7 @@ TESTS_OBJS = $(patsubst $(TESTS_FOLDER)/%.cpp, $(TESTS_BUILD_FOLDER)/%.o, $(TEST
 # are built.
 tests: $(CATCH_OBJ_FILE) $(BUILD_FOLDER) $(OBJS_WITHOUT_MAIN) $(TESTS_BUILD_FOLDER) $(TESTS_OBJS)
 	$(CXX) $(OBJS_WITHOUT_MAIN) $(CATCH_OBJ_FILE) $(TESTS_OBJS) -o $(TESTS_TARGET) $(LIBS)
-	$@
+# $@
 
 # create the object files for the tests
 $(TESTS_BUILD_FOLDER)/%.o: $(TESTS_FOLDER)/%.cpp

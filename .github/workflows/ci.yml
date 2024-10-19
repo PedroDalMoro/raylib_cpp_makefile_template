@@ -6,6 +6,7 @@ on:
 
 jobs:
   build:
+    name: build_game
     runs-on: ubuntu-latest
 
     steps:
@@ -13,9 +14,20 @@ jobs:
 
       # Utilizando o Docker para rodar o build
       - name: Build usando Docker
-        run: docker run --rm -v ${{ github.workspace }}:/app -w /app ptitluca/raylib:latest /bin/bash -c "make"
+        run: docker run --rm -v ${{ github.workspace }}:/app -w /app ptitluca/raylib:latest /bin/bash -c "make game"
 
-      # # Exemplo de como rodar os testes, se for o caso
-      # - name: Rodar testes no container Docker
-      #   run: |
-      #     docker run --rm -v ${{ github.workspace }}:/app -w /app ptitluca/raylib:latest /bin/bash -c "./tests/tests_linux"
+  tests:
+    name: test_game
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Add caminhos pras libs
+        run: export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH 
+
+      # Exemplo de como rodar os testes, se for o caso
+      - name: Rodar testes no container Docker
+        run: |
+          docker run --rm -v ${{ github.workspace }}:/app -w /app ptitluca/raylib:latest /bin/bash -c "make tests"
+          ./tests_linux
