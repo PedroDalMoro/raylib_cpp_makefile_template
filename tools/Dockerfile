@@ -1,3 +1,6 @@
+# to build a new image with different raylib version, change the RAYLIB_VERSION value, and from the
+# command line, send: docker build -t raylib_static_build:x.x tools/
+
 FROM ubuntu:22.04
 
 # tag from github to specify raylib version

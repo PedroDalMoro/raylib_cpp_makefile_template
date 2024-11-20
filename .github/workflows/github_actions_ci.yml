@@ -1,0 +1,35 @@
+name: Github Actions CI Pipeline
+
+on:
+  # pipeline is only called when a PR to main is opened
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    name: build_game
+    runs-on: ubuntu-latest
+    
+    container:
+      image: pedrodm22/raylib_static_build:5.5
+      volumes:
+        - ${{ github.workspace }}:/app
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: make game 
+      run: make game
+
+  tests:
+    name: build_and_run_unit_tests
+    runs-on: ubuntu-latest
+
+    container:
+      image: pedrodm22/raylib_static_build:5.5
+      volumes:
+        - ${{ github.workspace }}:/app
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: make tests
+      run: make tests
