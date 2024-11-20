@@ -1,30 +1,32 @@
-# Raylib simple C++ makefile template
-This is a very simple and easy to understand template for using raylib on Windows. This template uses a simple makefile to build the project in C++, and it's configured to run the vscode debugger out of the box. 
+# THE Raylib C++ template
 
-I know that there are thousands of other raylib templates out there, but this only shows how *not so easy* can be to get everything up and running. I hope that this example can help someone to start their development, and especially, to understand what they are doing. 
+This project has evolved beyond the very simple initial concept it was designed for. However, **if you're looking for the original minimal version**, refer to commit `744a4de837dae6a609631d478a5e1554e823db22`. It remains a great starting point for those who need just a basic setup.
 
-> NOTE: If you want the really simple makefile version, take a look at commit `744a4de837dae6a609631d478a5e1554e823db22` on this project. Things have evolved since that. 
-
-### Components
-* Raylib v5.0.
+### Current components
+* **Raylib v5.0**.
 * C++.
-* Build using a very simple makefile. 
-* Debugging with vscode integrated stuff.
+* **Makefile** configured for build and unit tests. 
+* **Unit tests** implemented using Catch2.
+* **Dockerfile** to create the raylib image. If you want to use mine, checkout `pedrodm22/raylib_static_build` on docker hub.
+* **GitHub Actions pipeline** for both build and unit tests. The pipeline is setup to trigger when there is a PR to branch `main`.
+* Debugging with VSCode integrated features.
 
-### Setup
+### Setup on Windows
 The steps to configure everything to get this up and running are:
-1. Donwload and install raylib from the main website (https://www.raylib.com). For me the installer was `raylib_installer_v5.0.mingw.64bit.exe` and the `raylib` folder was placed directly on `C:\`.
+1. Download and install Raylib from the main website (https://www.raylib.com). For me, the installer was `raylib_installer_v5.0.mingw.64bit.exe` and the `raylib` folder was placed directly on `C:\`.
 
-2. Add the `C:\raylib\w64devkit\bin` folder to the *path* on windows. This can be done in the `edit system environment variables` panel. With that, you should be able to run `make --version` and `g++ --version` from any terminal and see some information on the screen.
-> NOTE: I suggest using the command `which g++` in the terminal to make sure that the executable being called is the one on the raylib folder. I spent an *enourmous ammount of time* trying to solve other bugs, and the problem was that Windows was trying to use the `g++.exe` that was placed on another folder.
+2. Add the `C:\raylib\w64devkit\bin` folder to the *path* on Windows. This can be done in the `Edit System Environment Variables` panel. With that, you should be able to run `make --version` and `g++ --version` from any terminal and see some information on the screen.
+> NOTE: I suggest using the command `which g++` in the terminal to make sure that the executable being called is the one in the Raylib folder. I spent an *enormous amount of time* trying to solve other bugs, and the problem was that Windows was trying to use the `g++.exe` placed in another folder.
 
-3. Clone this repository, and navigate to its folder via terminal (or just open it on vscode terminal). Then, run `make`. That should build the example code and generate a `main.exe` file, that you can run in the same terminal and open the game window. 
+3. Clone this repository, and navigate to its folder via terminal (or just open it in VSCode). Then, run `make`. That should build the example code and generate a `game.exe` file, which you can run in the same terminal to open the game window. 
 
 ### Build options
 The `make` commands that can be used are:
 
-1. `make`, which builds everything and generates the executable. 
-2. `make clean`, which removes the previously created executable. 
+1. `make game`, which builds everything and generates the executable.
+1. `make run`, which builds everything and runs the executable.
+2. `make clean`, which removes everything from the build process.
+3. `make tests`, which builds and runs the unit tests (the `.cpp` files inside the `tests/` folder).
 
 ### Debugging
 In order to debug the project, enter vscode and simply press `F5`, that should start the debug session using the configurations inside the `tasks.json` and `lauch.json` files. 
